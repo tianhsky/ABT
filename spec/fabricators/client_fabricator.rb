@@ -1,0 +1,2 @@
+Fabricator(:client) do
+end
