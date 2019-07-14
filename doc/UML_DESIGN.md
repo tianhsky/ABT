@@ -2,9 +2,9 @@
 
 ## SEQUENCE
 
-  ![UML SEQUENCE](doc/assets/uml_sequence.png)
+  ![UML SEQUENCE](assets/uml_sequence.png)
 
 
 ## MODELS
 
-  ![UML MODELS](doc/assets/uml_models.png)
+  ![UML MODELS](assets/uml_models.png)
