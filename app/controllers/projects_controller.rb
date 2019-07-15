@@ -12,6 +12,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    @html = @project.project_action.action_detail['html']
   end
 
   # GET /projects/new

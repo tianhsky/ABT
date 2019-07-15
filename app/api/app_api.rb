@@ -1,9 +1,10 @@
-class API < Grape::API
-  prefix 'api'
+class AppAPI < Grape::API
   format :json
 
-  mount V1::ClientsAPI
-  mount V1::EventsAPI
+  helpers APIHelpers::ParamsHelper
+  
+  mount APIVisitors::ApplicationAPI
+  mount APICustomers::ApplicationAPI
 
   rescue_from Grape::Exceptions::ValidationErrors do |e|
     rack_response({

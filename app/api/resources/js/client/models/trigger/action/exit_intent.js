@@ -27,7 +27,7 @@ window.ABT.models.trigger.action.ExitIntent = class Model extends window.ABT.mod
 
     let checks = []
     for (let c of matchDetail.conditions){
-      let match = (exitPosition==c)
+      let match = (exitPosition==c.str)
       checks.push(match)
     }
 

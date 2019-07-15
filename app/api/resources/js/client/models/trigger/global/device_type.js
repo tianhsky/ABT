@@ -17,7 +17,7 @@ window.ABT.models.trigger.global.DeviceType = class Model extends window.ABT.mod
     let matchDetail = self.trigger.match_detail
     let checks = []
     for (let c of matchDetail.conditions){
-      let isDeviceTypeMatched = deviceType==c
+      let isDeviceTypeMatched = (deviceType==c.str)
       checks.push(isDeviceTypeMatched)
     }
 

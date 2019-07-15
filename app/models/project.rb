@@ -4,8 +4,8 @@ class Project
   include Mongoid::Paranoia
   include AASM
 
-  field :aasm_state
   field :title, type: String
+  field :status, type: String
 
   embeds_one :project_action, class_name: "ProjectAction"
   embeds_many :project_triggers, class_name: "ProjectTrigger"
@@ -16,7 +16,7 @@ class Project
   index({ pclient_id: 1 }, { unique: false, name: "pclient_id_index" })
   
 
-  aasm do
+  aasm column: 'status' do
     state :active, initial: true
     state :inactive
 
@@ -29,7 +29,7 @@ class Project
     end
   end
 
-  scope :active, -> { where(aasm_state: 'active') }
+  scope :active, -> { where(status: 'active') }
   
 
   def global_triggers

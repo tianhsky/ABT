@@ -72,14 +72,11 @@ gem 'mini_racer' # support ExecJS::RubyRacerRuntime
 gem 'foundation-rails', '~> 6.5.3.0'
 gem 'autoprefixer-rails'
 
-# for pretty console output
-gem 'awesome_print', '~> 1.8.0'
+gem 'awesome_print', '~> 1.8.0' # for pretty console output
 gem 'aasm', '~> 5.0.5' # state machine
 gem 'dotenv-rails', '~> 2.7.4' # app config
 gem 'rack-cors', '~> 1.0.3' # cors middleware
-
-
 gem 'grape', '~> 1.2.4' # restful api framework
-gem 'uuid'
-
+gem 'uuid', '~> 2.3.9' # uuid tools
+gem 'active_model_serializers', '~> 0.10.10' # model serializer
 

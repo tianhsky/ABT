@@ -16,8 +16,10 @@ module ABT
     # -- all .rb files in that directory are automatically loaded.
 
     # load libs
-    config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
+    config.paths.add 'app/api', glob: File.join('**', '*.rb')
+    config.paths.add 'app/serializers', glob: File.join('**', '*.rb')
     config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
+    config.autoload_paths += Dir[Rails.root.join('app', 'serializers', '*')]
 
     # CORS
     config.middleware.insert_before 0, Rack::Cors do

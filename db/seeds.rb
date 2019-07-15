@@ -50,14 +50,18 @@ project_trigger2 = ProjectTrigger.new({
   match_type: 'device_type',
   match_detail: {
     relation: 'or', 
-    conditions: ['desktop']
+    conditions: [
+      { str: 'desktop' }
+    ]
   }
 })
 project_trigger3 = ProjectTrigger.new({
   match_type: 'exit_intent',
   match_detail: {
     relation: 'and', 
-    conditions: ['top']
+    conditions: [
+      { str: 'top' }
+    ]
   }
 })
 project.project_triggers << project_trigger1
