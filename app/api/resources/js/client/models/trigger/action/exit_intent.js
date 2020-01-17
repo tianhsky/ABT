@@ -5,7 +5,7 @@ window.ABT.models.trigger.action.ExitIntent = class Model extends window.ABT.mod
   }
 
   register(){
-    let self = this
+    const self = this
 
     ABT.utils.$("body").mouseleave((e) => {
       let x = e.clientX
@@ -19,7 +19,7 @@ window.ABT.models.trigger.action.ExitIntent = class Model extends window.ABT.mod
   }
 
   isValidNow(x, y){
-    let self = this
+    const self = this
     let valid =  false
     let matchDetail = self.trigger.match_detail
 
@@ -71,7 +71,7 @@ window.ABT.models.trigger.action.ExitIntent = class Model extends window.ABT.mod
   }
 
   triggerAction(){
-    let self = this
+    const self = this
     let action = self.project.action
     if(action.action_type == 'lightbox'){
       let lightbox = self.lightbox

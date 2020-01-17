@@ -10,6 +10,13 @@ module APIHelpers
     def project_params
       project = params[:project]
 
+      begin
+        project[:project_triggers].each do |t|
+          t[:id] = nil if t[:id].include?("temp-")
+        end
+      rescue
+      end
+
       strong_params.require(:project).permit(
         :id, :title, :status,
         :project_action => [

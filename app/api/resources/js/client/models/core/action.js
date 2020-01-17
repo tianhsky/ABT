@@ -7,7 +7,7 @@ window.ABT.models.core.Action = class Model{
   }
 
   enterWithCallbacks(){
-    let self = this
+    const self = this
     self.beforeEnter().then((v) => {
       self.enter()
     }).then((v) => {
@@ -16,7 +16,7 @@ window.ABT.models.core.Action = class Model{
   }
 
   exitWithCallbacks(){
-    let self = this
+    const self = this
     self.beforeExit().then((v) => {
       self.exit()
     }).then((v) => {
@@ -33,17 +33,17 @@ window.ABT.models.core.Action = class Model{
   afterExit(){ return new RSVP.Promise((resolve, reject) => {resolve()}) }
 
   logAction(action){
-    let self = this
+    const self = this
     let promise = ABT.utils.Request.postJson({
       path: '/api/v1/events',
       data: {
         event_log: {
           project_id: self.project.id,
-          browser_info_attributes: {
+          browser_info: {
             user_agent: ABT.utils.Browser.getUserAgent(),
             window_size: ABT.utils.Browser.getWindowSize()
           },
-          action_info_attributes: action
+          action_info: action
         }
       }
     })

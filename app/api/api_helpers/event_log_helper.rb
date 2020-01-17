@@ -14,11 +14,11 @@ module APIHelpers
     def event_log_params
       strong_params.require(:event_log).permit(
         :project_id,
-        :browser_info_attributes => [
+        :browser_info => [
           :user_agent,
           :window_size => [:width, :height]
         ],
-        :action_info_attributes => [
+        :action_info => [
           :action_type, 
           :action_detail
         ]

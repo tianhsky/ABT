@@ -7,7 +7,7 @@ window.ABT.models.core.Pclient = class Model{
   }
 
   setup(){
-    let self = this
+    const self = this
 
     // session
     ABT.utils.Session.setupSessionID()

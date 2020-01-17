@@ -2,7 +2,7 @@ window.ABT.models.trigger.global.DeviceType = class Model extends window.ABT.mod
 
 
   isValid(){
-    let self = this
+    const self = this
     let valid = false
 
     // check device type

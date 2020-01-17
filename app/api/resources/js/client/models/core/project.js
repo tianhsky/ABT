@@ -6,7 +6,7 @@ window.ABT.models.core.Project = class Model{
   }
 
   isGlobalTriggersValid(){
-    let self = this
+    const self = this
     let valid = true
     for(let t of self.project.triggers.global){
       let trigger = ABT.models.core.Trigger.createTriggerFor(self.client, self.project, t)
@@ -18,7 +18,7 @@ window.ABT.models.core.Project = class Model{
   }
 
   registerActionTriggers(){
-    let self = this
+    const self = this
     for(let t of self.project.triggers.action){
       let trigger = ABT.models.core.Trigger.createTriggerFor(self.client, self.project, t)
       trigger.register()

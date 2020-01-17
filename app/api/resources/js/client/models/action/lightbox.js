@@ -1,20 +1,17 @@
 window.ABT.models.action.Lightbox = class Model extends window.ABT.models.core.Action{
 
   enter() {
-    let self = this
+    const self = this
     let promise = new RSVP.Promise((resolve, reject) => {
       if(!self.checkCondition()){
         reject()
         return
       }
 
-      let src = `${ABT.pclient.config.host}/projects/${self.project.id}`
-      let iframe = ABT.utils.$('<iframe>')
-      iframe.attr("src", src)
-      ABT.utils.$('body').append(iframe)
+      self.executeCallbackJS('before_enter')
 
-      self.iframe = iframe
-      ABT.iframe = self.iframe
+      self.showMask()
+      const iframe = self.showIframe()
 
       self.applyCss(iframe)
       self.initMessageHandler()
@@ -29,7 +26,8 @@ window.ABT.models.action.Lightbox = class Model extends window.ABT.models.core.A
   }
 
   afterEnter(){
-    let self = this
+    const self = this
+    self.executeCallbackJS('after_enter')
     let action = {
       action_type: "lightbox_open",
       action_detail: {
@@ -39,10 +37,13 @@ window.ABT.models.action.Lightbox = class Model extends window.ABT.models.core.A
   }
 
   exit(){
-    let self = this
+    const self = this
     let promise = new RSVP.Promise((resolve, reject) => {
+      self.executeCallbackJS('before_close')
+
       if(self.iframe){
         self.iframe.remove()
+        ABT.utils.$(".abt-iframe-container").remove()
         self.iframe = null
       }
       if(self.mask){
@@ -56,7 +57,8 @@ window.ABT.models.action.Lightbox = class Model extends window.ABT.models.core.A
   }
 
   afterExit(){
-    let self = this
+    const self = this
+    self.executeCallbackJS('after_close')
     let action = {
       action_type: "lightbox_exit",
       action_detail: {
@@ -66,6 +68,47 @@ window.ABT.models.action.Lightbox = class Model extends window.ABT.models.core.A
   }
 
   // helpers
+
+  showIframe(){
+    const self = this
+
+    // container
+    let container = ABT.utils.$('<div class="abt-iframe-container">')
+    let containerCSS = {
+      "overflow": "hidden",
+      "position": "fixed",
+      "z-index": "500",
+      "left": 0,
+      "right": 0,
+      "margin-left": "auto",
+      "margin-right": "auto",
+      "top": "10%",
+    }
+    container.css(containerCSS)
+    const customCSS = self.action.action_detail.css
+    container.css(customCSS)
+
+    // iframe
+    let iframe = ABT.utils.$('<iframe>')
+    const src = `${ABT.pclient.config.host}/projects/${self.project.id}`
+    iframe.attr("src", src)
+    iframeCSS = {
+      "width": "100%",
+      "height": "100%",
+      "border": 0
+    }
+    iframe.css(iframeCSS)
+
+    // dom
+    container.append(iframe)
+    ABT.utils.$('body').append(container)
+    // self.mask.append(container)
+
+    self.iframe = iframe
+    ABT.iframe = self.iframe
+
+    return iframe
+  }
 
   getEntersCountCookieName(){
     return `abt-p-${this.project.id}-action-enters_count`
@@ -111,15 +154,12 @@ window.ABT.models.action.Lightbox = class Model extends window.ABT.models.core.A
 
   applyCss(iframe){
     let css = this.action.action_detail.css
-    if(css){
-      iframe.css(css)
-    }
-
-    // apply mask
-    this.ensureMask(iframe)
+    // if(css){
+    //   iframe.css(css)
+    // }
 
     // center element
-    this.ensureCenter(iframe)
+    // this.ensureCenter(iframe)
   }
 
   ensureCenter(iframe){
@@ -135,14 +175,14 @@ window.ABT.models.action.Lightbox = class Model extends window.ABT.models.core.A
     iframe.css(css)
   }
 
-  ensureMask(iframe){
-    let self = this
+  showMask(){
+    const self = this
     if(self.mask){
       return
     }
 
     let $ = ABT.utils.$
-    let mask = $("<div>")
+    let mask = $('<div class="abt-mask">')
     let css = {
       "position": "fixed",
       "top": 0,
@@ -161,6 +201,20 @@ window.ABT.models.action.Lightbox = class Model extends window.ABT.models.core.A
     self.mask = mask
 
     $("body").append(mask)
+
+    return mask
+  }
+
+  executeCallbackJS(stage){
+    const self = this
+    const code = self.action.callback_js[stage]
+    if(code){
+      try{
+        eval(code)
+      }catch(err){
+
+      }
+    }
   }
 
   // iframe send an instruction for parent to execute

@@ -2,7 +2,7 @@ window.ABT.models.trigger.global.Url = class Model extends window.ABT.models.cor
 
 
   isValid(){
-    let self = this
+    const self = this
     let valid = false
     let matchDetail = self.trigger.match_detail
     let checks = []

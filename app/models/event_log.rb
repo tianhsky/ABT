@@ -4,7 +4,6 @@ class EventLog
 
   embeds_one :browser_info, class_name: "BrowserInfo"
   embeds_one :action_info, class_name: "ActionInfo"
-  accepts_nested_attributes_for :browser_info, :action_info
 
   belongs_to :pclient, class_name: "Pclient"
   belongs_to :project, class_name: "Project"
