@@ -14,6 +14,7 @@ class ProjectService
           p_action = p.project_action
           {
             id: p.id.to_s,
+            title: p.title,
             status: p.status,
             triggers: {
               global: p.global_triggers.map do |t|

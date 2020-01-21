@@ -41,8 +41,8 @@ project_trigger1 = ProjectTrigger.new({
   match_detail: {
     relation: 'and',
     conditions: [
-      { rule: 'contains', str: 'local:3000/registration' },
-      { rule: 'does not contain', str: 'local:3000/registration/done' }
+      { rule: 'contains', str: '/registration' },
+      { rule: 'does not contain', str: '/registration/done' }
     ]
   }
 })

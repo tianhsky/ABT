@@ -36,44 +36,47 @@ module APIHelpers
     end
 
     def pclient_js
-      js = []
-      # load vendor libs
-      js << compile_js(path: "../resources/js/client/vendors/jquery.js", compile: false)
-      js << compile_js(path: "../resources/js/client/vendors/cookie.js", compile: false)
-      js << compile_js(path: "../resources/js/client/vendors/rsvp.js", compile: false)
+      pclient_id = params[:pclient_id]
+      Rails.cache.fetch("pclient-js-#{pclient_id}", expires_in: 1.day) do
+        js = []
+        # load vendor libs
+        js << compile_js(path: "../resources/js/client/vendors/jquery.js", compile: false)
+        js << compile_js(path: "../resources/js/client/vendors/cookie.js", compile: false)
+        js << compile_js(path: "../resources/js/client/vendors/rsvp.js", compile: false)
 
-      # init global vars
-      js << compile_js(path: "../resources/js/client/mains/vars.js")
-      js << compile_js(content: "window.ABT.state = #{pclient_state_json.to_json}")
+        # init global vars
+        js << compile_js(path: "../resources/js/client/mains/vars.js")
+        js << compile_js(content: "window.ABT.state = #{pclient_state_json.to_json}")
 
-      # utils
-      js << compile_js(path: "../resources/js/client/utils/browser.js")
-      js << compile_js(path: "../resources/js/client/utils/session.js")
-      js << compile_js(path: "../resources/js/client/utils/request.js")
+        # utils
+        js << compile_js(path: "../resources/js/client/utils/browser.js")
+        js << compile_js(path: "../resources/js/client/utils/session.js")
+        js << compile_js(path: "../resources/js/client/utils/request.js")
 
-      # cores
-      js << compile_js(path: "../resources/js/client/models/core/pclient.js")
-      js << compile_js(path: "../resources/js/client/models/core/project.js")
-      js << compile_js(path: "../resources/js/client/models/core/trigger.js")
-      js << compile_js(path: "../resources/js/client/models/core/action.js")
+        # cores
+        js << compile_js(path: "../resources/js/client/models/core/pclient.js")
+        js << compile_js(path: "../resources/js/client/models/core/project.js")
+        js << compile_js(path: "../resources/js/client/models/core/trigger.js")
+        js << compile_js(path: "../resources/js/client/models/core/action.js")
 
-      # triggers global
-      js << compile_js(path: "../resources/js/client/models/trigger/global/url.js")
-      js << compile_js(path: "../resources/js/client/models/trigger/global/device_type.js")
+        # triggers global
+        js << compile_js(path: "../resources/js/client/models/trigger/global/url.js")
+        js << compile_js(path: "../resources/js/client/models/trigger/global/device_type.js")
 
-      # triggers action
-      js << compile_js(path: "../resources/js/client/models/trigger/action/exit_intent.js")
+        # triggers action
+        js << compile_js(path: "../resources/js/client/models/trigger/action/exit_intent.js")
 
-      # actions
-      js << compile_js(path: "../resources/js/client/models/action/lightbox.js")
+        # actions
+        js << compile_js(path: "../resources/js/client/models/action/lightbox.js")
 
 
-      # starter
-      js << compile_js(path: "../resources/js/client/mains/main.js")
+        # starter
+        js << compile_js(path: "../resources/js/client/mains/main.js")
 
-      content = js.join("\n")
+        content = js.join("\n")
 
-      uglify_js(content: content)
+        uglify_js(content: content)
+      end
     end
 
   end

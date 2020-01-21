@@ -14,6 +14,8 @@ class Project
   belongs_to :pclient, class_name: "Pclient"
 
   index({ pclient_id: 1 }, { unique: false, name: "pclient_id_index" })
+
+  after_save :bust_cache
   
 
   aasm column: 'status' do
@@ -39,6 +41,10 @@ class Project
 
   def action_triggers
     project_triggers.where(:match_type.in => ProjectAction::ACTION_MATCH_TYPES)
+  end
+
+  def bust_cache
+    Rails.cache.delete("pclient-js-#{pclient_id}")
   end
 
 end
