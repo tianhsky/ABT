@@ -2,7 +2,8 @@ class AppAPI < Grape::API
   format :json
 
   helpers APIHelpers::ParamsHelper
-  
+
+  mount APIPing::ApplicationAPI  
   mount APIVisitors::ApplicationAPI
   mount APICustomers::ApplicationAPI
 

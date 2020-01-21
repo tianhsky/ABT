@@ -32,6 +32,7 @@ RUN apt-get install -y sudo wget curl cron htop ntp nano unzip
 
 RUN apt-get install -y \
     git-core nodejs mysql-client \
+    libsqlite3-dev \
     build-essential libpq-dev zlib1g-dev libxml2-dev \
     libxslt-dev libpcre3 libpcre3-dev uuid-dev iputils-ping
 ##########################################################################
