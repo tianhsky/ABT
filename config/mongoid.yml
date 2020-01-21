@@ -155,3 +155,15 @@ test:
         read:
           mode: :primary
         max_pool_size: 1
+
+production:
+  clients:
+    default:
+      database: abt_production
+      hosts:
+        - <%= ENV['APP_DB_HOST'] %>
+      options:
+        user: <%= ENV['APP_DB_USERNAME'] || 'abt_db_user' %>
+        password: <%= ENV['APP_DB_PASSWORD'] %>
+
+
