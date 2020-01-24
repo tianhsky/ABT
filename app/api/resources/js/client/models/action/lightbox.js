@@ -99,8 +99,31 @@ window.ABT.models.action.Lightbox = class Model extends window.ABT.models.core.A
     }
     iframe.css(iframeCSS)
 
+    // exit btn
+    let exitBtn = $("<div>X</div>")
+    const exitBtnCSS = {
+      "position": "absolute",
+      "top": "5px",
+      "right": "10px",
+      "font-weight": "bold",
+      "border": "1px solid transparent",
+      "border-radius": "100px",
+      "width": "22px",
+      "height": "22px",
+      "text-align": "center",
+      "line-height": "1",
+      "cursor": "pointer",
+      "background": "#676767",
+      "color": "white"
+    }
+    exitBtn.css(exitBtnCSS)
+    exitBtn.bind("click", (e)=>{
+      self.exitWithCallbacks()
+    })
+
     // dom
     container.append(iframe)
+    container.append(exitBtn)
     ABT.utils.$('body').append(container)
     // self.mask.append(container)
 
