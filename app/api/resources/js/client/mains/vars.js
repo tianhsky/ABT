@@ -12,3 +12,5 @@ window.ABT.models.trigger.global = {}
 window.ABT.models.trigger.action = {}
 window.ABT.models.action = {}
 window.ABT.models.core = {}
+
+window.ABT.listeners = {}

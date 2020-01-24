@@ -19,6 +19,9 @@ window.ABT.models.action.Lightbox = class Model extends window.ABT.models.core.A
       // after enter
       self.incrementSessionEntersCount()
 
+      // reg listener
+      self.setupGlobalListener()
+
       resolve()
       return
     })
@@ -68,6 +71,13 @@ window.ABT.models.action.Lightbox = class Model extends window.ABT.models.core.A
   }
 
   // helpers
+
+  setupGlobalListener(){
+    const self = this
+    window.ABT.listeners.lightbox = {
+      exit: self.exitWithCallbacks.bind(self)
+    }
+  }
 
   showIframe(){
     const self = this
@@ -246,9 +256,16 @@ window.ABT.models.action.Lightbox = class Model extends window.ABT.models.core.A
       // IMPORTANT: Check the origin of the data! 
       if (~event.origin.indexOf('http')) {
         // The data has been sent from your site 
-        let data = event.data
-        if(data && data.action){
-          eval(data.action)
+        const data = event.data
+        console.log("Child Event:", data)
+        if(data){
+          try{
+            let json = JSON.parse(data)
+            eval(json.action)
+          }
+          catch(err){
+            console.log("Child Event Err:", err)
+          }
         }
         // localStorage.ifr_data = event.data
       } else {
