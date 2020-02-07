@@ -3,6 +3,14 @@ class AppAPI < Grape::API
 
   helpers APIHelpers::ParamsHelper
 
+  before do
+    header "Access-Control-Allow-Origin", "*"
+    header "Access-Control-Request-Method", "*"
+    header "Access-Control-Allow-Headers", "*"
+    header "Access-Control-Expose-Headers", "*"
+    header "Access-Control-Allow-Credentials", "true"
+  end
+
   mount APIPing::ApplicationAPI  
   mount APIVisitors::ApplicationAPI
   mount APICustomers::ApplicationAPI

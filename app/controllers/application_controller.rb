@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
     response.headers['Access-Control-Allow-Headers'] = '*'
     response.headers['Access-Control-Expose-Headers'] = '*'
     response.headers['Access-Control-Allow-Credentials'] = 'true'
-
   end
 
 end
