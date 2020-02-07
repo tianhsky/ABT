@@ -78,7 +78,7 @@ gem 'autoprefixer-rails'
 gem 'awesome_print', '~> 1.8.0' # for pretty console output
 gem 'aasm', '~> 5.0.5' # state machine
 gem 'dotenv-rails', '~> 2.7.4' # app config
-gem 'rack-cors', '~> 1.0.3' # cors middleware
+gem 'rack-cors', '~> 1.0.5' # cors middleware
 gem 'grape', '~> 1.2.4' # restful api framework
 gem 'uuid', '~> 2.3.9' # uuid tools
 gem 'active_model_serializers', '~> 0.10.10' # model serializer
