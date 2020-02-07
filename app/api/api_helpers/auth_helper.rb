@@ -7,9 +7,5 @@ module APIHelpers
       warden = env["warden"]
       @current_user ||= warden.authenticate
     end
-
-    def authenticate({email, pass})
-      
-    end
   end
 end
