@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :set_embeddable_headers, only: [:show]
-  protect_from_forgery except: [:show]
+  # protect_from_forgery except: [:show]
 
   # GET /projects
   # GET /projects.json

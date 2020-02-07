@@ -267,7 +267,6 @@ window.ABT.models.action.Lightbox = class Model extends window.ABT.models.core.A
             console.log("Child Event Err:", err)
           }
         }
-        // localStorage.ifr_data = event.data
       } else {
         // The data hasn't been sent from your site! 
         // Be careful! Do not use it. 

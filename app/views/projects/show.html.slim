@@ -1,6 +1,5 @@
-= stylesheet_link_tag "projects"
-= javascript_include_tag "projects"
+- cache("project-html-#{@project.id}", :expires_in => 1.month) do
+  = stylesheet_link_tag "projects"
+  = javascript_include_tag "projects"
 
-
-
-= raw @html
+  = raw @html

@@ -3,6 +3,7 @@ module APICustomers
     prefix 'customer-api'
     format :json
 
+    mount V1::PclientsAPI
     mount V1::ProjectsAPI
 
   end

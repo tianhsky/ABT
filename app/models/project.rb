@@ -45,6 +45,7 @@ class Project
 
   def bust_cache
     Rails.cache.delete("pclient-js-#{pclient_id}")
+    Rails.cache.delete("project-html-#{self.id}")
   end
 
 end

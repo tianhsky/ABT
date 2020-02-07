@@ -4,7 +4,7 @@ module APIHelpers
     def pclient
       @pclient ||= Pclient.find(params[:pclient_id])
     end
-
+    
     def pclient_state_json
       @pclient_state ||= ProjectService.clientProjectsJson(pclient: pclient, status:'active')
     end
@@ -37,7 +37,7 @@ module APIHelpers
 
     def pclient_js
       pclient_id = params[:pclient_id]
-      Rails.cache.fetch("pclient-js-#{pclient_id}", expires_in: 1.day) do
+      Rails.cache.fetch("pclient-js-#{pclient_id}", expires_in: 1.month) do
         js = []
         # load vendor libs
         js << compile_js(path: "../resources/js/client/vendors/jquery.js", compile: false)

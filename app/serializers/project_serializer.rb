@@ -1,5 +1,5 @@
 class ProjectSerializer < MongoidSerializer
-  attributes :id, :title, :status
+  attributes :id, :title, :status, :pclient_id, :errors
 
 
   has_one :project_action

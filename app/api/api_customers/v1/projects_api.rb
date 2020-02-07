@@ -5,7 +5,7 @@ module APICustomers
 
       helpers APIHelpers::ProjectHelper
       
-      namespace :projects do      
+      namespace :projects do
         get '/:project_id' do
           get_project
           present ProjectSerializer.new(@project).as_json

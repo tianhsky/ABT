@@ -46,6 +46,7 @@ module APIHelpers
     def save_project
       project_id = params[:project][:id]
       if project_id.blank?
+        params[:project].delete(:id)
         @project = Project.new
       else
         @project = Project.find(project_id)
